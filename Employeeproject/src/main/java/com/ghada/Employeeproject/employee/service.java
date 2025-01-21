@@ -1,9 +1,11 @@
 package com.ghada.Employeeproject.employee;
 import com.ghada.Employeeproject.employee.employee;
 
+import com.ghada.Employeeproject.employee.kafka.KafkaProducerConfig;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,9 @@ import java.util.Optional;
 public class service {
     @Autowired
     private Repository repo;
+    @Autowired
+    private KafkaTemplate<String, employee> kafkaTemplate;
+
     public String createEmployee( @Valid employee empl) {
 
          employee employeeToSave = new employee();
@@ -21,11 +26,12 @@ public class service {
          employeeToSave.setDepartmentid(empl.getDepartmentid());
          employeeToSave.setEmail(empl.getEmail());
          employeeToSave.setContact(empl.getContact());
-        employeeToSave.setLeavebalance(0);
+         employeeToSave.setLeavebalance(0);
 
 
         repo.save(employeeToSave);
-
+        String topic="create-employee";
+        kafkaTemplate.send(topic,employeeToSave);
      return "employee created successfully";
     }
 
@@ -36,7 +42,7 @@ public class service {
             foundedEmployee.setEmail(empl.getEmail());
             foundedEmployee.setCategoryid(empl.getCategoryid());
             foundedEmployee.setDepartmentid(empl.getDepartmentid());
-           foundedEmployee.setLeavebalance(empl.getLeavebalance());
+      //     foundedEmployee.setLeavebalance(empl.getLeavebalance());
 
            repo.save(foundedEmployee);
             return "employee updated successfully";
@@ -65,6 +71,9 @@ public class service {
             foundedEmployee.setLeavededuction(leaveded);
 
             repo.save(foundedEmployee);
+            String topic="updateEmplyeeDeduction";
+            kafkaTemplate.send(topic,foundedEmployee);
+
             return "employee  updated successfully";
 
         }).orElseThrow(()->new EntityNotFoundException("employee not found"));
@@ -95,4 +104,15 @@ public class service {
                 new EntityNotFoundException("Employee not found with ID: " + id));
     }
 
+    public String updateEmployeeAbsentHours(Integer employeeid,Integer absenthours) {
+
+        return repo.findById(employeeid).map(foundedEmployee -> {
+            foundedEmployee.setAbsentHours(foundedEmployee.getAbsentHours()+absenthours);
+            repo.save(foundedEmployee);
+            return "employee number of absent hours updated successfully";
+
+        }).orElseThrow(()->new EntityNotFoundException("employee not found"));
+
+
+    }
 }

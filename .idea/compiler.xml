@@ -7,17 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="attendanceproject" />
         <module name="DiscoveryServer" />
+        <module name="payroll-project" />
         <module name="deduction" />
         <module name="Employeeproject" />
         <module name="Leaveproject" />
       </profile>
-      <profile name="Annotation profile for Leaveproject" enabled="true">
+      <profile name="Annotation profile for departmentProject" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="departmentProject" />
@@ -29,8 +30,10 @@
       <module name="DiscoveryServer" options="-parameters" />
       <module name="Employeeproject" options="-parameters" />
       <module name="Leaveproject" options="-parameters" />
+      <module name="attendanceproject" options="-parameters" />
       <module name="deduction" options="-parameters" />
       <module name="departmentProject" options="-parameters" />
+      <module name="payroll-project" options="-parameters" />
     </option>
   </component>
 </project>

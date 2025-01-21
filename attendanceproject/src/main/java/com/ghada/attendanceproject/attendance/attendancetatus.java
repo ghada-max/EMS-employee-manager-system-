@@ -1,6 +1,7 @@
 package com.ghada.attendanceproject.attendance;
 
-public enum attendanceStatus {
+public enum attendancetatus {
+    PRESENT,
     ON_LEAVE,
     ABSENT,
     LATE

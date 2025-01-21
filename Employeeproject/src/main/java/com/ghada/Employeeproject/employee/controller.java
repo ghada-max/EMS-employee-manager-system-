@@ -45,6 +45,14 @@ public class controller {
 
     }
 
+    @PostMapping("/updateEmployeeAbsentHours/{id}")
+    public ResponseEntity<String> updateEmployeeAbsentHours(@PathVariable Integer id,@RequestParam Integer absentHours) {
+
+        String Response=serv.updateEmployeeAbsentHours(id,absentHours);
+        return new ResponseEntity<>(Response,HttpStatus.OK);
+
+    }
+
     @PostMapping("/updateEmployeeLeaveDeduction/{id}")
     public ResponseEntity<String> updateEmployeeLeaveDeduction(@PathVariable Integer id, @RequestParam Double leaveded) {
 

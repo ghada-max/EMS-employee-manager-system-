@@ -1,14 +1,10 @@
-package com.ghada.Employeeproject.employee;
+package com.ghada.payrollProject.payroll;
 
 
 
 import com.ghada.payrollProject.payroll.enums.PaymentStatus;
 import com.ghada.payrollProject.payroll.enums.PaymentType;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -20,12 +16,14 @@ import org.hibernate.annotations.DynamicInsert;
 @Data
 @Builder
 @Table(name="payroll")
-public class payroll {
+public class Payroll {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     private Integer employeeid;
+    private String employeename;
+
     private Double salary;
     private Double leavededuction;
     private Double AttendanceDEduction;

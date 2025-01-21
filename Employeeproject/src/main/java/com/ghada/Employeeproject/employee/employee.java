@@ -10,6 +10,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.io.Serializable;
+
 @Entity
 
 @NoArgsConstructor
@@ -18,8 +20,8 @@ import org.hibernate.annotations.DynamicInsert;
 @Data
 @Builder
 @Table(name="employee")
-public class employee {
-
+public class employee implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
@@ -37,7 +39,9 @@ public class employee {
     // @Pattern(regexp = "^[0-9]+$", message = "Contact name must contain only numbers.")
     private Integer contact;
     private Integer leavebalance;  // Enu
-    private Double leavededuction;  // Enu
+    private Double  leavededuction;  // Enu
+    private Integer  AbsentHours;
+    private Double AttendanceDeduction;
 
 
     //  private Double rate;
