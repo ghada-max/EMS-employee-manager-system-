@@ -1,4 +1,7 @@
 package com.ghada.Employeeproject.employee;
+import com.ghada.Employeeproject.employee.communication.department;
+import com.ghada.Employeeproject.employee.communication.departmentMicroservice;
+
 import com.ghada.Employeeproject.employee.employee;
 
 import com.ghada.Employeeproject.employee.kafka.KafkaProducerConfig;
@@ -17,9 +20,12 @@ public class service {
     private Repository repo;
     @Autowired
     private KafkaTemplate<String, employee> kafkaTemplate;
+    @Autowired
+    private departmentMicroservice departmentMicro;
+
 
     public String createEmployee( @Valid employee empl) {
-
+        department dep=new department();
          employee employeeToSave = new employee();
          employeeToSave.setName(empl.getName());
          employeeToSave.setCategoryid(empl.getCategoryid());
@@ -27,13 +33,19 @@ public class service {
          employeeToSave.setEmail(empl.getEmail());
          employeeToSave.setContact(empl.getContact());
          employeeToSave.setLeavebalance(0);
-
+         employeeToSave.setAttendanceDeduction(0.0);
+         employeeToSave.setLeavededuction(0.0);
+         Optional<department> FoundedDepartment=departmentMicro.GetDepartmentById(empl.getDepartmentid());
+         Double salary=FoundedDepartment.get().getSalary();
+         employeeToSave.setSalary(salary);
+       //  employeeToSave.setPaymenttype(empl.getPaymenttype().getLabel());
 
         repo.save(employeeToSave);
         String topic="create-employee";
         kafkaTemplate.send(topic,employeeToSave);
      return "employee created successfully";
     }
+
 
     public String updateEmployee(Integer id, @Valid employee empl) {
        return repo.findById(id).map(foundedEmployee -> {
@@ -51,6 +63,9 @@ public class service {
 
 
 
+    }
+    public List<department> getAllDepartments(){
+        return departmentMicro.getAllDepartments();
     }
 
     public String updateEmployeeLeaveBalance(Integer id) {
@@ -108,7 +123,11 @@ public class service {
 
         return repo.findById(employeeid).map(foundedEmployee -> {
             foundedEmployee.setAbsentHours(foundedEmployee.getAbsentHours()+absenthours);
+            foundedEmployee.setAttendanceDeduction(40.00*absenthours);
             repo.save(foundedEmployee);
+            String topic="updateEmplyeeAttendanceDeduction";
+            kafkaTemplate.send(topic,foundedEmployee);
+
             return "employee number of absent hours updated successfully";
 
         }).orElseThrow(()->new EntityNotFoundException("employee not found"));

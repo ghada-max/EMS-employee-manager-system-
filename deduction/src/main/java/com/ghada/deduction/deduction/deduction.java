@@ -23,7 +23,4 @@ public class deduction {
     private Integer id;
     private Integer emloyeeid;
     private Date Ammount;
-
-
-
 }

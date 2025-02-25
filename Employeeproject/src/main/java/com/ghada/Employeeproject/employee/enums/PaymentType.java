@@ -1,5 +1,4 @@
-package com.ghada.payrollProject.payroll.enums;
-
+package com.ghada.Employeeproject.employee.enums;
 
 public enum PaymentType {
     BankTransfer("Bank Transfer"),

@@ -2,6 +2,7 @@ package com.ghada.Employeeproject.employee;
 
 
 
+import com.ghada.Employeeproject.employee.enums.PaymentType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -39,10 +40,13 @@ public class employee implements Serializable {
     // @Pattern(regexp = "^[0-9]+$", message = "Contact name must contain only numbers.")
     private Integer contact;
     private Integer leavebalance;  // Enu
+    private Double  salary;  // Enu
+
     private Double  leavededuction;  // Enu
     private Integer  AbsentHours;
     private Double AttendanceDeduction;
-
+    //@Enumerated(EnumType.STRING)
+    //private PaymentType paymenttype;
 
     //  private Double rate;
 

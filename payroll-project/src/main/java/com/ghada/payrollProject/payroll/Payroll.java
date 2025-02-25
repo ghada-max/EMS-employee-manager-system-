@@ -3,7 +3,6 @@ package com.ghada.payrollProject.payroll;
 
 
 import com.ghada.payrollProject.payroll.enums.PaymentStatus;
-import com.ghada.payrollProject.payroll.enums.PaymentType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -29,9 +28,9 @@ public class Payroll {
     private Double AttendanceDEduction;
     private Double salaryAfterwork;
     @Enumerated
-    private PaymentStatus paymentstat;
-    @Enumerated
-    private PaymentType paymenttype;
+    private PaymentStatus paymentstatus;
+   // @Enumerated(EnumType.STRING)
+  //  private PaymentType paymenttype;
     //@NotEmpty(message = "name field is empty")
     //@Pattern(regexp = "^[A-Za-z]+$", message = "Contact name must contain only letters (A-Z, a-z).")
 

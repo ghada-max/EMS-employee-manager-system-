@@ -1,4 +1,7 @@
 package com.ghada.departmentProject.department;
 
-public interface Repository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+@org.springframework.stereotype.Repository
+public interface Repository extends JpaRepository<department,Integer> {
 }

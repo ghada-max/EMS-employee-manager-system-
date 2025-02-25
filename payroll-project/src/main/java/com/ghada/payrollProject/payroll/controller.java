@@ -14,7 +14,17 @@ public class controller {
     }
 
 
+    private ResponseEntity<String> createPayment(@RequestBody Payroll payroll){
+        String Response=serv.createPayment(payroll);
+        return new ResponseEntity<>(Response,HttpStatus.OK);
 
+
+    }
+
+    @GetMapping("/GetSalaryAfterWork")
+    private Void GetSalaryAfterWork(){
+        return serv.calculateSalary();
+    }
 
 
 

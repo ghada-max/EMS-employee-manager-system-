@@ -1,4 +1,5 @@
 package com.ghada.Employeeproject.employee;
+import com.ghada.Employeeproject.employee.communication.department;
 import com.ghada.Employeeproject.employee.service;
 
 import jakarta.validation.Valid;
@@ -68,6 +69,11 @@ public class controller {
 
     }
 
+    @GetMapping("/Employee/getAllDepartments")
+    public List<department> getAllDepartments() {
+        return serv.getAllDepartments();
+
+    }
 
     @GetMapping("/getEmployeById/{id}")
     public ResponseEntity<employee> getEmployeById(@PathVariable Integer id) {

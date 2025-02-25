@@ -2,6 +2,10 @@ package com.ghada.payrollProject.payroll.employeeDto;
 
 
 
+import com.ghada.payrollProject.payroll.enums.PaymentStatus;
+import com.ghada.payrollProject.payroll.enums.PaymentType;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +24,10 @@ public class employee {
     private Integer leavebalance;
     private Double leavededuction;
     private Integer absentHours;
+    private Double salary;
+
     private Double attendanceDeduction;
+   // @Enumerated(EnumType.STRING)
+    //private PaymentType paymenttype;
+
 }
