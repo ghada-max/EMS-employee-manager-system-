@@ -5,8 +5,11 @@
     <file url="file://$PROJECT_DIR$/Employeeproject/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Leaveproject/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/attendanceproject/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bankConsumer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/deduction/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/departmentProject/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/paymentConsumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/paymentConsumer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/payroll-project/src/main/java" charset="UTF-8" />
   </component>
 </project>

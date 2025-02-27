@@ -32,7 +32,8 @@ public class service {
          employeeToSave.setDepartmentid(empl.getDepartmentid());
          employeeToSave.setEmail(empl.getEmail());
          employeeToSave.setContact(empl.getContact());
-         employeeToSave.setLeavebalance(0);
+        employeeToSave.setBankcoordinates(empl.getBankcoordinates());
+        employeeToSave.setLeavebalance(0);
          employeeToSave.setAttendanceDeduction(0.0);
          employeeToSave.setLeavededuction(0.0);
          Optional<department> FoundedDepartment=departmentMicro.GetDepartmentById(empl.getDepartmentid());

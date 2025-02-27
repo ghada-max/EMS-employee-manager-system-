@@ -41,7 +41,7 @@ public class employee implements Serializable {
     private Integer contact;
     private Integer leavebalance;  // Enu
     private Double  salary;  // Enu
-
+    private String bankcoordinates;
     private Double  leavededuction;  // Enu
     private Integer  AbsentHours;
     private Double AttendanceDeduction;

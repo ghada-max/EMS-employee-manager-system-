@@ -2,7 +2,7 @@ package com.ghada.payrollProject.payroll.enums;
 
 
 public enum PaymentType {
-    BankTransfer("Bank Transfer"),
+    BankTransfer("BankTransfer"),
     Check("Check"),
     Cash("Cash");
 
