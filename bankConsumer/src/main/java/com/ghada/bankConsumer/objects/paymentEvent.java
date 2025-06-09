@@ -1,8 +1,6 @@
-package com.ghada.bankConsumer;
+package com.ghada.bankConsumer.objects;
 
 import lombok.*;
-
-import java.io.Serializable;
 
 @Builder
 @Getter

@@ -13,6 +13,8 @@ import java.util.Optional;
 public interface repository extends JpaRepository<attendance,Integer> {
     Optional<List<attendance>> findByDate(LocalDateTime today);
 
-    Optional<attendance> findByEmployeeid(Integer employeeid);
+    //Optional<attendance> findByEmployeeid(Integer employeeid);
+    Optional<attendance> findByEmployeeidAndDate(Integer employeeid, LocalDate date);
+
 }
 

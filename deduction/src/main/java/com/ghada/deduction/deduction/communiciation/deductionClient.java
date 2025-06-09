@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "employeemicrosrvice", url = "http://localhost:8673/api/Ems") // Change the URL based on your Leave module's service URL
+@FeignClient(name = "employeemicroservice", url = "http://localhost:8673/api/Ems") // Change the URL based on your Leave module's service URL
 public interface  deductionClient {
 
     @GetMapping("/getAllEmployee")

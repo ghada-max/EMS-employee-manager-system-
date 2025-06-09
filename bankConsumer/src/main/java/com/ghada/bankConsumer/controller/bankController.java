@@ -1,7 +1,8 @@
 package com.ghada.bankConsumer.controller;
 
 import com.ghada.bankConsumer.bankService;
-import com.ghada.bankConsumer.paymentEvent;
+import com.ghada.bankConsumer.objects.paymentEvent;
+import com.ghada.bankConsumer.objects.paymentResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +20,12 @@ public class bankController {
     @GetMapping("/getEvents")
     public List<paymentEvent> getpaymentEventsList(){
         return service.getAllEvents();
+    }
+
+
+    @GetMapping("/getResults")
+    public List<paymentResult> getpaymentResultsList(){
+        return service.makePayment();//verify Results
+        //send Via kafka
     }
 }

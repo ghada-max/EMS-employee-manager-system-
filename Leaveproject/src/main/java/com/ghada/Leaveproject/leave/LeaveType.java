@@ -3,7 +3,8 @@ package com.ghada.Leaveproject.leave;
 public enum LeaveType {
     WAITING("Waiting for approval"),
     SUBMITTED("Leave submitted"),
-    REJECTED("Leave rejected");
+    REJECTED("Leave rejected"),
+    APPROVED("Leave approved");
 
     private final String label;
 

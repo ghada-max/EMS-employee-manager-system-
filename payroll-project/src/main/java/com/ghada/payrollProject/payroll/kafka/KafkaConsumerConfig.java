@@ -19,8 +19,8 @@ import java.util.Map;
 public class KafkaConsumerConfig {
 
     @Bean
-    public ConsumerFactory<String, employee> consumerFactory() {
-        JsonDeserializer<employee> jsonDeserializer = new JsonDeserializer<>(employee.class);
+    public ConsumerFactory<String, Object> consumerFactory() {
+        JsonDeserializer<Object> jsonDeserializer = new JsonDeserializer<>(Object.class);
         jsonDeserializer.setRemoveTypeHeaders(true);
 
         return new DefaultKafkaConsumerFactory<>(Map.of(
@@ -32,8 +32,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, employee> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, employee> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }

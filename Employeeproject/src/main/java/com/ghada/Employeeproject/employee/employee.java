@@ -2,6 +2,7 @@ package com.ghada.Employeeproject.employee;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ghada.Employeeproject.employee.enums.PaymentType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

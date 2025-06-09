@@ -30,19 +30,20 @@ public class service {
     }
 
     public String createAttendance(attendance attd) {
-        LocalDateTime today = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS); // Remove fractional seconds
+        LocalDate today = LocalDate.now(); // Remove fractional seconds
         attd.setDate(today);
         attd.setClockInTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        attd.setClockOutTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 
         repo.save(attd);
         return "attendance created successfully";
     }
 
     public String updateClockOut(Integer employeeid) {
-        LocalDateTime today = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS); // Remove fractional seconds
+        LocalDate today = LocalDate.now(); // Remove fractional seconds
 
-        repo.findByDate(today).orElseThrow(()->new EntityNotFoundException("no attendances created yet today"));
-        repo.findByEmployeeid(employeeid).map( foundedAttendance ->{
+       // repo.findByDate(today).orElseThrow(()->new EntityNotFoundException("no attendances created yet today"));
+        repo.findByEmployeeidAndDate(employeeid,today).map( foundedAttendance ->{
             foundedAttendance.setClockOutTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));//automatically
             foundedAttendance.setMarkedAt(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));//automatically
             foundedAttendance.setMarkedBy("admin");//automatically

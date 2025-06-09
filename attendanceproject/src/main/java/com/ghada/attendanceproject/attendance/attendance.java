@@ -29,7 +29,7 @@ public class attendance {
     private Integer id;
     private Integer userid;//selected
     private Integer employeeid;//selected
-    private LocalDateTime date;//mark date now
+    private LocalDate date;//mark date now
    // @NotEmpty(message="InDate unmarked")
     private LocalDateTime clockInTime;//mark timenow
     private LocalDateTime openinghour;

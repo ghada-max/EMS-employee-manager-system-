@@ -32,11 +32,12 @@ public class service {
          employeeToSave.setDepartmentid(empl.getDepartmentid());
          employeeToSave.setEmail(empl.getEmail());
          employeeToSave.setContact(empl.getContact());
-        employeeToSave.setBankcoordinates(empl.getBankcoordinates());
-        employeeToSave.setLeavebalance(0);
-         employeeToSave.setAttendanceDeduction(0.0);
-         employeeToSave.setLeavededuction(0.0);
-         Optional<department> FoundedDepartment=departmentMicro.GetDepartmentById(empl.getDepartmentid());
+         employeeToSave.setBankcoordinates(empl.getBankcoordinates());
+         employeeToSave.setLeavebalance(0);//
+         employeeToSave.setAttendanceDeduction(0.0);//
+         employeeToSave.setAbsentHours(0);//
+         employeeToSave.setLeavededuction(0.0);//
+         Optional<department> FoundedDepartment=departmentMicro.GetDepartmentById(empl.getDepartmentid());//
          Double salary=FoundedDepartment.get().getSalary();
          employeeToSave.setSalary(salary);
        //  employeeToSave.setPaymenttype(empl.getPaymenttype().getLabel());
@@ -69,6 +70,11 @@ public class service {
         return departmentMicro.getAllDepartments();
     }
 
+
+
+
+
+
     public String updateEmployeeLeaveBalance(Integer id) {
         return repo.findById(id).map(foundedEmployee -> {
             foundedEmployee.setLeavebalance(foundedEmployee.getLeavebalance()+1);
@@ -89,7 +95,6 @@ public class service {
             repo.save(foundedEmployee);
             String topic="updateEmplyeeDeduction";
             kafkaTemplate.send(topic,foundedEmployee);
-
             return "employee  updated successfully";
 
         }).orElseThrow(()->new EntityNotFoundException("employee not found"));

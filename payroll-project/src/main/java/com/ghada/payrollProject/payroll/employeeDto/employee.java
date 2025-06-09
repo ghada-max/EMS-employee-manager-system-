@@ -25,6 +25,8 @@ public class employee {
     private Double leavededuction;
     private Integer absentHours;
     private Double salary;
+    private String bankcoordinates;
+// + getter and setter
 
     private Double attendanceDeduction;
    // @Enumerated(EnumType.STRING)

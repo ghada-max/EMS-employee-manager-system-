@@ -1,10 +1,12 @@
 package com.ghada.payrollProject.payroll;
 
 import com.ghada.payrollProject.payroll.communication.employeeMicroservice;
+import com.ghada.payrollProject.payroll.dto.paymentResult;
 import com.ghada.payrollProject.payroll.dto.paymentevent;
 import com.ghada.payrollProject.payroll.employeeDto.employee;
 import com.ghada.payrollProject.payroll.enums.PaymentType;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -17,7 +19,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static com.ghada.payrollProject.payroll.enums.PaymentType.BankTransfer;
-
+@Slf4j
 @Service
 public class service {
     @Autowired
@@ -34,11 +36,11 @@ public class service {
     @KafkaListener(topics="create-employee",groupId="payroll-group")
     public Payroll handleNewEmployee(employee message){
        // employee employeeDto = new employee();
-
-        Payroll payroll = Payroll.builder().employeeid(message.getId())
+          Payroll payroll = Payroll.builder().employeeid(message.getId())
                 .employeename(message.getName())
                 .salary(message.getSalary())
                 .AttendanceDEduction(0.0)
+                  .salaryAfterwork(0.0)
                 .leavededuction(0.0)
                 .paymenttype(BankTransfer.getLabel())
                 //.paymenttype(message.getPaymenttype())
@@ -135,6 +137,23 @@ public class service {
 }
 
 
+    //create a service that consume BankPaymentResult
+    @Transactional
+    @KafkaListener(topics="paymentResult",groupId="payment-group")
+    public paymentResult handlePaymentResult(paymentResult message){
+
+        paymentResult BankResult = paymentResult.builder()
+                .BankPaymentResult(message.getBankPaymentResult())
+                .ammount(message.getAmmount())
+                .id(message.getId())
+                .build();
+
+        log.info(String.valueOf(BankResult));
+
+        return BankResult;
+
+    }
+     //update bank paymentresults for each
 
 
 }

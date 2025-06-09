@@ -1,6 +1,108 @@
 version: '3.8'
 
 services:
+
+
+  database:
+    image: mysql:8.0
+    container_name: db
+    ports:
+      - "3307:3306"  # Expose MySQL port 3306 to host port 3307
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+    volumes:
+     - db_data:/var/lib/mysql
+
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    container_name: phpmyadmin
+    env_file:
+      - .env
+    ports:
+      - '8090:80'
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+
+  eureka:
+    container_name: discovery-server
+    build:
+      context: ./DiscoveryServer
+      dockerfile: Dockerfile
+    image: discovery-server:latest
+
+    ports:
+      - "8761:8761"
+
+  employee:
+    container_name: employeeapp
+    build:
+      context: ./Employeeproject
+      dockerfile: Dockerfile
+
+    image: employee:latest
+    depends_on:
+      - database
+    ports:
+      - "8673:8673"
+
+  leave:
+    container_name: leaveapp
+    build:
+      context: ./Leaveproject
+      dockerfile: Dockerfile
+    image: leave:latest
+    depends_on:
+      - database
+    ports:
+      - "8674:8674"
+
+  attendance:
+    container_name: attendanceapp
+    build:
+      context: ./attendanceproject
+      dockerfile: Dockerfile
+    image: attendance:latest
+    depends_on:
+      - database
+    ports:
+      - "8676:8676"
+
+
+  department:
+    container_name: departmentapp
+    build:
+      context: ./departmentProject
+      dockerfile: Dockerfile
+    image: department:latest
+    depends_on:
+      - database
+    ports:
+      - "8764:8764"
+
+  payroll:
+    container_name: payrollapp
+    build:
+      context: ./payroll-project
+      dockerfile: Dockerfile
+    image: payroll:latest
+    depends_on:
+      - database
+    ports:
+      - "8677:8677"
+
+
+
+
+
+
+
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -14,6 +116,7 @@ services:
       - zookeeper_data:/var/lib/zookeeper
     networks:
       - microservices-net
+
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -42,4 +145,6 @@ volumes:
   zookeeper_data:
     driver: local
   kafka_data:
+    driver: local
+  db_data:
     driver: local
