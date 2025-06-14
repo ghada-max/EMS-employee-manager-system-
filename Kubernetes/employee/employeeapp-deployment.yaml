@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employeeapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: employeeapp
+  template:
+    metadata:
+      labels:
+        app: employeeapp
+    spec:
+      
+      containers:
+        - name: employeeapp
+          image: employeeapp:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8673

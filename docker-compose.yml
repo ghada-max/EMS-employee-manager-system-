@@ -29,6 +29,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
 
+  frontend:
+    build:
+      context: /home/ghada/Bureau/mantis-free-angular-admin-template-v5.0.0/mantis-free-angular-admin-template
+      dockerfile: Dockerfile
+    container_name: angular-app
+    ports:
+      - "4200:80"
+
+
   eureka:
     container_name: discovery-server
     build:
@@ -50,6 +59,29 @@ services:
       - database
     ports:
       - "8673:8673"
+
+  bankconsumer:
+    container_name: bankconsumerapp
+    build:
+      context: ./bankConsumer
+      dockerfile: Dockerfile
+    image: bankconsumer:latest
+    depends_on:
+      - database
+    ports:
+      - "8722:8722"
+
+  deduction:
+    container_name: deductionapp
+    build:
+      context: ./deduction
+      dockerfile: Dockerfile
+    image: deduction:latest
+    depends_on:
+      - database
+    ports:
+      - "8675:8675"
+
 
   leave:
     container_name: leaveapp

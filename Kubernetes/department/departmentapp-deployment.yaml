@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: departmentapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: departmentapp
+  template:
+    metadata:
+      labels:
+        app: departmentapp
+    spec:
+      
+      containers:
+        - name: departmentapp
+          image: department:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8764

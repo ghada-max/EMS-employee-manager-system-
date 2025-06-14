@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payrollapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payrollapp
+  template:
+    metadata:
+      labels:
+        app: payrollapp
+    spec:
+      
+      containers:
+        - name: payrollapp
+          image: payroll:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8677

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankconsumerapp-service
+spec:
+  type: NodePort
+  selector:
+    app: bankconsumerapp
+  ports:
+    - port: 8722
+      targetPort: 8722
+      nodePort: 30079
+

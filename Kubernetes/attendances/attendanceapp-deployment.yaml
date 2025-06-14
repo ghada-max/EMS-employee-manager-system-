@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attendancesapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attendancesapp
+  template:
+    metadata:
+      labels:
+        app: attendancesapp
+    spec:
+      containers:
+        - name: attendanceapp
+          image: attendance:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8676

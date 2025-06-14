@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankconsumerapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bankconsumerapp
+  template:
+    metadata:
+      labels:
+        app: bankconsumerapp
+    spec:
+      containers:
+        - name: bankconsumerapp
+          image: bankconsumer:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8722

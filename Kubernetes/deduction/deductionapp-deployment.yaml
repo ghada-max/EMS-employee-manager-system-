@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deductionapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deductionapp
+  template:
+    metadata:
+      labels:
+        app: deductionapp
+    spec:
+      containers:
+        - name: deductionapp
+          image: deduction:latest
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8675

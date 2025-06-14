@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc   # This name is referenced in your Deployment's volume claimName
+spec:
+  accessModes:
+    - ReadWriteOnce  # Typical for single-node write access (most MySQL setups)
+  resources:
+    requests:
+      storage: 5Gi   # Amount of persistent storage requested
+  storageClassName: standard  # Optional, depends on your Kubernetes cluster setup
